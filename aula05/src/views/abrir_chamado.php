@@ -1,16 +1,17 @@
 <?php
-
-//nos proximos capitulos
-
+// abrir_chamado.php
+require_once "../../validador_acesso.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
+<!-- O conteúdo do arquivo abrir_chamado.php permanece o mesmo, mas você pode querer otimizar o código CSS e HTML. -->
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <meta charset="utf-8" />
+  <title>App Help Desk</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
   <style>
     .card-abrir-chamado {
       padding: 30px 0 0 0;
@@ -18,14 +19,14 @@
       margin: 0 auto;
     }
   </style>
-  <title>Chamado Real</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-dark p-4">
+
+  <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
       <img src="../../logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      Chamado Real
+      App Help Desk
     </a>
     <ul class="navbar-nav">
       <li class="nav-item">

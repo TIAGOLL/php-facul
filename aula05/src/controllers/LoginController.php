@@ -1,6 +1,6 @@
 <?php
 
-require_once "../models/User.php";
+require_once "./src/models/User.php";
 
 class LoginController
 {
@@ -20,14 +20,14 @@ class LoginController
   {
     foreach ($this->users as $user) {
       if ($user->email == $email && $user->password == $password) {
-        $_SESSION["autenticacao"] = "SIM";
+        $_SESSION["autenticar"] = "SIM";
         $_SESSION["id"] = $user->id;
         $_SESSION["profile_id"] = $user->profile_id;
         header("Location: ../view/home.php");
-        exit;
+        die();
       }
     }
-    $_SESSION["autenticacao"] = "NAO";
+    $_SESSION["autenticar"] = "NAO";
     header("Location: index.php?login=erro");
     exit;
   }
