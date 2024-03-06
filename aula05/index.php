@@ -11,13 +11,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <title>Chamado Real</title>
   <style>
     .card-login {
       padding: 30px 0 0 0;
-      margin: 0 auto;
       width: 350px;
+      margin: 0 auto;
     }
   </style>
 </head>
@@ -37,12 +37,12 @@
             Login
           </div>
           <div class="card-body">
-            <form action="valida_login.php" method="post">
+            <form action="valida_login.php" method="post" class="">
               <div class="form-group">
-                <input type="email" name="email" class="form-control" placeholder="E-mail">
+                <input name="email" type="email" class="form-control" placeholder="E-mail">
               </div>
               <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="Senha">
+                <input name="senha" type="password" class="form-control" placeholder="Senha">
               </div>
               <?php
               if (isset($_GET['login']) && $_GET['login'] == 'erro') { ?>
