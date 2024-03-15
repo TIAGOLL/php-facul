@@ -27,6 +27,7 @@ class LoginController
         die();
       }
     }
+    echo "<script>alert('foi')</script>";
     $_SESSION["autenticar"] = "NAO";
     header("Location: index.php?login=erro");
     exit;
