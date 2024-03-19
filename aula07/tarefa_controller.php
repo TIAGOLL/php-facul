@@ -24,7 +24,7 @@
 		$conexao = new Conexao();
 
 		$tarefaService = new TarefaService($conexao, $tarefa);
-		$tarefas = $tarefaService->recuperar();
+		$tarefas = $tarefaService->recuperar((isset($_GET['categoria']))? $_GET['categoria']:'',(isset($_GET['prioridade']))? $_GET['prioridade']:'',(isset($_GET['date']))? $_GET['date']:'desc');
 	
 	} else if($acao == 'atualizar') {
 

@@ -19,16 +19,19 @@ class TarefaService {
 		$stmt->execute();
 	}
 
-	public function recuperar() { //read
+	public function recuperar($categoria = '',$prioridade='',$date='') {
+		//read
+
 		$query = '
 			select 
-				t.id, s.status, t.tarefa 
+				*
 			from 
 				tb_tarefas as t
 				left join tb_status as s on (t.id_status = s.id)
+				where categoria like "%"?"%" and prioridade like "%"?"%" ORDER BY ?
 		';
 		$stmt = $this->conexao->prepare($query);
-		$stmt->execute();
+		$stmt->execute([$categoria, $prioridade, $date]);
 		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
 
