@@ -109,23 +109,28 @@ require 'tarefa_controller.php';
 						<div class="col">
 							<h4>Todas tarefas</h4>
 							<hr />
-							
+
 							<div>
-								<form action="">
-									<select  name="date" >
+								<form action="" class="w-full flex flex-row justify-center">
+
+									<label for="date">Data</label>
+									<select name="date">
 										<option value="asc">Crescente</option>
 										<option value="desc">Decrescente</option>
 									</select>
+
+									<label for="categoria">Categoria</label>
 									<select name="categoria">
-										<option value="todas">Todas</option>
+										<option value="">Todas</option>
 										<option value="estudo">Estudo</option>
 										<option value="diarias">Diarias</option>
 										<option value="eventuais">Eventuais</option>
 									</select>
+
+									<label for="prioridade">Prioridade</label>
 									<select name="prioridade">
-										
+										<option value="">Todas</option>
 										<option value="urgente">Urgente</option>
-										<option value="todas">Todas</option>
 										<option value="normal">Normal</option>
 									</select>
 									<button type="submit">Pesquisa</button>
@@ -135,12 +140,15 @@ require 'tarefa_controller.php';
 							<?php foreach ($tarefas as $indice => $tarefa) { ?>
 								<div class="row mb-3 d-flex align-items-center tarefa">
 									<div class="col-sm-7" id="tarefa_<?= $tarefa->id ?>">
-										<?= $tarefa->tarefa ?> (<?= $tarefa->status ?>) 
+										<?= $tarefa->tarefa ?> (<?= $tarefa->status ?>)
 									</div>
 									<div class="col-sm-5 mt-2 d-flex justify-content-between">
-										
-										<?= $tarefa->data_cadastrado ?>
-										
+										<?php $date1 = new DateTimeImmutable($tarefa->prazo); ?>
+										<?= $date1->format('d/m/Y h:m') ?>
+
+										<?php $date2 = new DateTimeImmutable($tarefa->data_cadastrado); ?>
+										<?= $date2->format('d/m/Y h:m') ?>
+
 										<i class="fas fa-trash-alt fa-lg text-danger" onclick="remover(<?= $tarefa->id ?>)"></i>
 
 										<?php if ($tarefa->status == 'pendente') { ?>
