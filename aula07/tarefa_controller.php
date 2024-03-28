@@ -10,11 +10,15 @@
 	if($acao == 'inserir' ) {
 		$tarefa = new Tarefa();
 		$tarefa->__set('tarefa', $_POST['tarefa']);
+		$tarefa->__set('categoria', $_POST['categoria']);
+		$tarefa->__set('prioridade', $_POST['prioridade']);
+		$tarefa->__set('prazo', $_POST['prazo']);
 
 		$conexao = new Conexao();
 
 		$tarefaService = new TarefaService($conexao, $tarefa);
 		$tarefaService->inserir();
+		
 
 		header('Location: nova_tarefa.php?inclusao=1');
 	
