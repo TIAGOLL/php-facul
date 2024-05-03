@@ -15,24 +15,23 @@ class TarefaService
 	}
 
 	public function inserir()
-	{ //create
-		$query = 'insert into tb_tarefas(tarefa)values(:tarefa)';
+	{
+		//create
+		$query = 'insert into tb_tarefas(tarefa,categoria,prioridade,prazo)values(?,?,?,?)';
 		$stmt = $this->conexao->prepare($query);
-		$stmt->bindValue(':tarefa', $this->tarefa->__get('tarefa'));
-		$stmt->execute();
+		$stmt->execute([$this->tarefa->__get('tarefa'),$this->tarefa->__get('categoria'),$this->tarefa->__get('prioridade'),$this->tarefa->__get('prazo')]);
 	}
 
 	public function recuperar($categoria = '', $prioridade = '', $date = '')
 	{
 		//read
-
 		$query = '
 			select 
 				*
 			from 
 				tb_tarefas as t
 				left join tb_status as s on (t.id_status = s.id)
-				where categoria like "%"?"%" and prioridade like "%"?"%" ORDER BY data_cadastrado '.$date.'
+				where categoria like "%"?"%" and prioridade like "%"?"%" ORDER BY data_cadastrado ' . $date . '
 		';
 
 		$stmt = $this->conexao->prepare($query);
@@ -60,7 +59,8 @@ class TarefaService
 	}
 
 	public function marcarRealizada()
-	{ //update
+	{
+		//update
 
 		$query = "update tb_tarefas set id_status = ? where id = ?";
 		$stmt = $this->conexao->prepare($query);

@@ -4,6 +4,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>App Lista Tarefas</title>
+	<script src="https://cdn.tailwindcss.com"></script>
 
 	<link rel="stylesheet" href="css/estilo.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -44,10 +45,21 @@
 							<hr />
 
 							<form method="post" action="tarefa_controller.php?acao=inserir">
-								<div class="form-group">
+								<div class="form-group mt-5">
 									<label>Descrição da tarefa:</label>
 									<input type="text" class="form-control" name="tarefa" placeholder="Exemplo: Lavar o carro">
-									<label>Prazo da tarefa</label>
+									<label for="categoria" class="mt-2">Categoria da sua tarefa:</label>
+									<select name="categoria" class="form-control mt-1">
+										<option value="estudo">Estudo</option>
+										<option value="diarias">Diarias</option>
+										<option value="eventuais">Eventuais</option>
+									</select>
+									<label for="prioridade" class="mt-2">Prioridade da sua tarefa:</label>
+										<select name="prioridade" class="form-control mt-1">
+											<option value="urgente">Urgente</option>
+											<option value="normal">Normal</option>
+										</select>
+									<label class="mt-2">Prazo da tarefa:</label>
 									<input type="date" class="form-control" name="prazo" onkeyup="document.getElementById('validation').innerHTML = validaData(this.value)">
 									<p id="validation"></p>
 									<script>
@@ -60,7 +72,7 @@
 											console.log(valor);
 
 											const diaAtual = <?php echo date("Y-m-d"); ?>
-											console.log()
+											console.log(valor)
 												//document.getElementById('inserir').setAttribute("disabled", true);
 
 										}

@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/Sao_Paulo');
 $acao = 'recuperar';
 require 'tarefa_controller.php';
 
@@ -17,10 +17,12 @@ require 'tarefa_controller.php';
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>App Lista Tarefas</title>
-
+	<script src="https://cdn.tailwindcss.com"></script>
 	<link rel="stylesheet" href="css/estilo.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 	<script>
 		function editar(id, txt_tarefa) {
@@ -95,7 +97,7 @@ require 'tarefa_controller.php';
 
 	<div class="container app">
 		<div class="row">
-			<div class="col-sm-3 menu">
+			<div class="col-md-3 menu">
 				<ul class="list-group">
 					<li class="list-group-item"><a href="index.php">Tarefas pendentes</a></li>
 					<li class="list-group-item"><a href="nova_tarefa.php">Nova tarefa</a></li>
@@ -103,7 +105,7 @@ require 'tarefa_controller.php';
 				</ul>
 			</div>
 
-			<div class="col-sm-9">
+			<div class="col-md-9">
 				<div class="container pagina">
 					<div class="row">
 						<div class="col">
@@ -111,40 +113,54 @@ require 'tarefa_controller.php';
 							<hr />
 
 							<div>
-								<form action="" class="w-full flex flex-row justify-center">
-
-									<label for="date">Data</label>
-									<select name="date">
-										<option value="asc">Crescente</option>
-										<option value="desc">Decrescente</option>
-									</select>
-
-									<label for="categoria">Categoria</label>
-									<select name="categoria">
-										<option value="">Todas</option>
-										<option value="estudo">Estudo</option>
-										<option value="diarias">Diarias</option>
-										<option value="eventuais">Eventuais</option>
-									</select>
-
-									<label for="prioridade">Prioridade</label>
-									<select name="prioridade">
-										<option value="">Todas</option>
-										<option value="urgente">Urgente</option>
-										<option value="normal">Normal</option>
-									</select>
-									<button type="submit">Pesquisa</button>
+								<form action="" class="flex flex-row justify-start p-3 space-x-16">
+									<div class="flex flex-col">
+										<label for="date">Data</label>
+										<select name="date" class="border-1 border-zinc-400 border rounded-md">
+											<option value="asc">Crescente</option>
+											<option value="desc">Decrescente</option>
+										</select>
+									</div>
+									<div class="flex flex-col">
+										<label for="categoria">Categoria</label>
+										<select name="categoria" class="border-1 border-zinc-400 border rounded-md">
+											<option value="">Todas</option>
+											<option value="estudo">Estudo</option>
+											<option value="diarias">Diarias</option>
+											<option value="eventuais">Eventuais</option>
+										</select>
+									</div>
+									<div class="flex flex-col">
+										<label for="prioridade">Prioridade</label>
+										<select name="prioridade" class="border-1 border-zinc-400 border rounded-md">
+											<option value="">Todas</option>
+											<option value="urgente">Urgente</option>
+											<option value="normal">Normal</option>
+										</select>
+									</div>
+									<button type="submit" class="border-2 border-zinc-800 bg-blue-100 rounded-md p-0 px-4 border">Pesquisa</button>
 								</form>
 							</div>
 
 							<?php foreach ($tarefas as $indice => $tarefa) { ?>
 								<div class="row mb-3 d-flex align-items-center tarefa">
-									<div class="col-sm-7" id="tarefa_<?= $tarefa->id ?>">
-										<?= $tarefa->tarefa ?> (<?= $tarefa->status ?>)
+									<div class="col-sm-5" id="tarefa_<?= $tarefa->id ?>">
+										<?= $tarefa->tarefa ?> (
+										<?= $tarefa->status ?>)
 									</div>
-									<div class="col-sm-5 mt-2 d-flex justify-content-between">
-										<?php $date1 = new DateTimeImmutable($tarefa->prazo); ?>
-										<?= $date1->format('d/m/Y h:m') ?>
+									<div class="col-sm-6 mt-2 d-flex justify-content-between">
+										<?php $date1 = new DateTimeImmutable($tarefa->prazo);
+										if ($tarefa->prazo <= date('Y-m-d')) {
+											echo '<p class="!text-red-500 !font-bold">Passou o prazo</p>';
+										} 
+										if($tarefa->status == 'Finalizado') {
+											echo "";
+										} 
+										if ($tarefa->prazo >= date('Y-m-d') && $tarefa->status != 'Finalizado') {
+											echo '<p>' . $date1->format('d/m/Y h:m') . '</p>';
+										}
+										?>
+
 
 										<?php $date2 = new DateTimeImmutable($tarefa->data_cadastrado); ?>
 										<?= $date2->format('d/m/Y h:m') ?>
@@ -152,7 +168,8 @@ require 'tarefa_controller.php';
 										<i class="fas fa-trash-alt fa-lg text-danger" onclick="remover(<?= $tarefa->id ?>)"></i>
 
 										<?php if ($tarefa->status == 'pendente') { ?>
-											<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $tarefa->id ?>, '<?= $tarefa->tarefa ?>')"></i>
+											<i class="fas fa-edit fa-lg text-info"
+												onclick="editar(<?= $tarefa->id ?>, '<?= $tarefa->tarefa ?>')"></i>
 											<i class="fas fa-check-square fa-lg text-success" onclick="marcarRealizada(<?= $tarefa->id ?>)"></i>
 										<?php } ?>
 									</div>

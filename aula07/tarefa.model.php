@@ -6,6 +6,8 @@ class Tarefa
 	private $id_status;
 	private $tarefa;
 	private $data_cadastro;
+	private $categoria;
+	private $prioridade;
 	private $prazo;
 
 	public function __get($atributo)
